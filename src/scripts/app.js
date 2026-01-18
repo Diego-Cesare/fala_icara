@@ -141,6 +141,7 @@ async function getFormData() {
         issue_type: document.getElementById('issue-type').value,
         description: document.getElementById('description').value,
         location: document.getElementById('location').value,
+        location_details: document.getElementById('location-details').value,
         location_link: currentLatitude && currentLongitude
             ? generateMapLink(currentLatitude, currentLongitude)
             : generateMapLink(locationValue),
