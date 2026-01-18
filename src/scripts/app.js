@@ -120,6 +120,10 @@ function getGeolocation() {
     );
 }
 
+function generateMapLink(location) {
+    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location)}`;
+}
+
 
 // Valida os dados do formulário
 function validateFormData(data) {
@@ -195,6 +199,7 @@ async function getFormData() {
         issue_type: document.getElementById('issue-type').value,
         description: document.getElementById('description').value,
         location: document.getElementById('location').value,
+        location_link: generateMapLink(document.getElementById('location').value),
         to_email: CONFIG.RECIPIENT_EMAIL,
         photo: ''
     };
