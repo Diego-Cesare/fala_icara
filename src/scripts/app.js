@@ -9,41 +9,13 @@ const CONFIG = {
 // Mensagens de feedback ao usuário
 const MESSAGES = {
     success: 'Ocorrência enviada com sucesso! Obrigado pela contribuição.',
-    error: 'Erro ao enviar. Tente novamente em alguns instantes.',
+    error: 'Erro ao enviar.\nTente novamente em alguns instantes.',
     validation: 'Por favor, preencha todos os campos obrigatórios.',
     sending: 'Enviando sua ocorrência...',
     geolocating: 'Obtendo sua localização...',
     geolocateSuccess: 'Localização obtida com sucesso!',
     geolocateError: 'Não foi possível obter sua localização. Verifique as permissões.'
 };
-
-// Prewiew da foto selecionada
-function setupPhotoPreview() {
-    const photoInput = document.getElementById('photo');
-    const photoPreview = document.getElementById('photoPreview');
-    const previewImg = document.getElementById('previewImg');
-    const removePhotoBtn = document.getElementById('removePhotoBtn');
-
-    photoInput.addEventListener('change', (e) => {
-        const file = e.target.files[0];
-
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = (event) => {
-                previewImg.src = event.target.result;
-                photoPreview.style.display = 'flex';
-            };
-            reader.readAsDataURL(file);
-        }
-    });
-
-    removePhotoBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        photoInput.value = '';
-        photoPreview.style.display = 'none';
-        previewImg.src = '';
-    });
-}
 
 // Obtém a localização do usuário
 function getGeolocation() {
@@ -90,6 +62,9 @@ function getGeolocation() {
                     }
 
                     locationInput.value = fullAddress;
+                    if (locationInput.value === fullAddress) {
+                        locationInput.style.backgroundColor = "#d4edda"; // verde claro
+                    }
                     showFeedback(MESSAGES.geolocateSuccess, 'success');
                 } else {
                     throw new Error('Erro ao obter endereço');
@@ -160,43 +135,6 @@ function showFeedback(message, type = 'success') {
     }
 }
 
-// Converte arquivo de imagem para Base64 com redimensionamento e compressão
-function fileToBase64(file) {
-    return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            const img = new Image();
-            img.onload = () => {
-                // Redimensiona a imagem
-                const canvas = document.createElement('canvas');
-                let width = img.width;
-                let height = img.height;
-
-                // Reduz para máximo 1600px de largura
-                const maxWidth = 1600;
-                if (width > maxWidth) {
-                    height = (height * maxWidth) / width;
-                    width = maxWidth;
-                }
-
-                canvas.width = width;
-                canvas.height = height;
-
-                const ctx = canvas.getContext('2d');
-                ctx.drawImage(img, 0, 0, width, height);
-
-                // Comprime em JPEG com qualidade 0.7 (reduz muito o tamanho)
-                const compressedBase64 = canvas.toDataURL('image/jpeg', 0.85);
-                resolve(compressedBase64);
-            };
-            img.onerror = reject;
-            img.src = e.target.result;
-        };
-        reader.onerror = reject;
-        reader.readAsDataURL(file);
-    });
-}
-
 // Coleta os dados do formulário
 async function getFormData() {
     const formData = {
@@ -209,17 +147,6 @@ async function getFormData() {
         to_email: CONFIG.RECIPIENT_EMAIL,
         photo: ''
     };
-
-    // Processa a imagem se existir
-    const photoInput = document.getElementById('photo');
-    if (photoInput.files && photoInput.files[0]) {
-        try {
-            formData.photo = await fileToBase64(photoInput.files[0]);
-        } catch (error) {
-            console.error('Erro ao processar imagem:', error);
-            showFeedback('Erro ao processar a imagem', 'error');
-        }
-    }
 
     return formData;
 }
@@ -262,9 +189,6 @@ function initForm() {
         console.error('Formulário não encontrado no DOM');
         return;
     }
-
-    // Inicializa preview de foto
-    setupPhotoPreview();
 
     // Listener para botão de geolocalização
     geoBtn.addEventListener('click', (e) => {

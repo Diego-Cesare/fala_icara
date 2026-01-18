@@ -24,6 +24,16 @@
     <main>
         <section class="form-container">
             <form id="reportForm">
+
+                <div class="form-group">
+                    <div class="location-label-group">
+                        <button type="button" id="geolocateBtn" class="btn-geolocate"
+                            title="Obter localização atual">Localização</button>
+                    </div>
+                    <input type="text" id="location" name="location" required readonly
+                        placeholder="Clique em 'Localização'">
+                </div>
+
                 <div class="form-group">
                     <label for="issue-type">Tipo de ocorrência:</label>
                     <select name="issue-type" id="issue-type" required>
@@ -39,28 +49,9 @@
                 </div>
 
                 <div class="form-group">
-                    <div class="location-label-group">
-                        <label for="location">Localização:</label>
-                        <button type="button" id="geolocateBtn" class="btn-geolocate"
-                            title="Obter localização atual">Localização automatica</button>
-                    </div>
-                    <input type="text" id="location" name="location" required readonly
-                        placeholder="Clique em 'Localização automática'">
-                </div>
-
-                <div class="form-group">
                     <label for="description">Descrição da ocorrência:</label>
                     <textarea name="description" id="description" placeholder="Descreva detalhadamente a ocorrência..."
                         required></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="photo">Foto (opcional):</label>
-                    <input type="file" id="photo" name="photo" accept="image/*">
-                    <div id="photoPreview" class="photo-preview" style="display: none;">
-                        <img id="previewImg" src="" alt="Preview da foto">
-                        <button type="button" id="removePhotoBtn" class="btn-remove-photo">Remover</button>
-                    </div>
                 </div>
 
                 <button type="submit" class="btn-submit">Enviar Ocorrência</button>
@@ -73,7 +64,8 @@
     <footer>
         <div class="footer-content">
             <div class="footer-section">
-                <p class="footer-description">Uma iniciativa da Prefeitura de Içara</p>
+                <p><strong>Prefeitura Municipal de içara</strong></p>
+                <p>Prefeitura que trabalha, cidade que cresce!</p>
             </div>
             <div class="footer-section">
                 <h3>Siga-nos</h3>
