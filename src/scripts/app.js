@@ -26,7 +26,7 @@ function setupPhotoPreview() {
 
     photoInput.addEventListener('change', (e) => {
         const file = e.target.files[0];
-        
+
         if (file) {
             const reader = new FileReader();
             reader.onload = (event) => {
@@ -61,30 +61,34 @@ function getGeolocation() {
     navigator.geolocation.getCurrentPosition(
         async (position) => {
             const { latitude, longitude } = position.coords;
-            
+            // Armazena para uso posterior
+            currentLatitude = latitude;
+            currentLongitude = longitude;
+
+
             try {
                 // API de geocoding reverso do OpenStreetMap Nominatim
                 const response = await fetch(
                     `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
                 );
-                
+
                 if (response.ok) {
                     const data = await response.json();
                     const address = data.address;
-                    
+
                     const street = address.road || address.street || '';
                     const houseNumber = address.house_number || '';
                     const neighbourhood = address.neighbourhood || address.suburb || '';
                     const city = address.city || address.town || '';
-                    
+
                     let fullAddress = [street, houseNumber, neighbourhood, city]
                         .filter(part => part)
                         .join(', ');
-                    
+
                     if (!fullAddress) {
                         fullAddress = `${latitude.toFixed(4)}, ${longitude.toFixed(4)}`;
                     }
-                    
+
                     locationInput.value = fullAddress;
                     showFeedback(MESSAGES.geolocateSuccess, 'success');
                 } else {
@@ -101,8 +105,8 @@ function getGeolocation() {
         (error) => {
             geoBtn.disabled = false;
             let errorMessage = MESSAGES.geolocateError;
-            
-            switch(error.code) {
+
+            switch (error.code) {
                 case error.PERMISSION_DENIED:
                     errorMessage = 'Você negou permissão de localização';
                     break;
@@ -113,15 +117,15 @@ function getGeolocation() {
                     errorMessage = 'A solicitação de localização expirou';
                     break;
             }
-            
+
             showFeedback(errorMessage, 'error');
             console.error('Erro de geolocalização:', error);
         }
     );
 }
 
-function generateMapLink(location) {
-    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location)}`;
+function generateMapLink(latitude, longitude) {
+    return `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
 }
 
 
@@ -148,7 +152,7 @@ function showFeedback(message, type = 'success') {
     feedbackEl.textContent = message;
     feedbackEl.className = `feedback feedback-${type}`;
     feedbackEl.style.display = 'block';
-    
+
     if (type === 'success') {
         setTimeout(() => {
             feedbackEl.style.display = 'none';
@@ -167,20 +171,20 @@ function fileToBase64(file) {
                 const canvas = document.createElement('canvas');
                 let width = img.width;
                 let height = img.height;
-                
+
                 // Reduz para máximo 1600px de largura
                 const maxWidth = 1600;
                 if (width > maxWidth) {
                     height = (height * maxWidth) / width;
                     width = maxWidth;
                 }
-                
+
                 canvas.width = width;
                 canvas.height = height;
-                
+
                 const ctx = canvas.getContext('2d');
                 ctx.drawImage(img, 0, 0, width, height);
-                
+
                 // Comprime em JPEG com qualidade 0.7 (reduz muito o tamanho)
                 const compressedBase64 = canvas.toDataURL('image/jpeg', 0.85);
                 resolve(compressedBase64);
@@ -199,7 +203,9 @@ async function getFormData() {
         issue_type: document.getElementById('issue-type').value,
         description: document.getElementById('description').value,
         location: document.getElementById('location').value,
-        location_link: generateMapLink(document.getElementById('location').value),
+        location_link: currentLatitude && currentLongitude
+            ? generateMapLink(currentLatitude, currentLongitude)
+            : generateMapLink(locationValue),
         to_email: CONFIG.RECIPIENT_EMAIL,
         photo: ''
     };
@@ -222,13 +228,13 @@ async function getFormData() {
 async function sendForm(formData) {
     try {
         showFeedback(MESSAGES.sending, 'info');
-        
+
         const response = await emailjs.send(
             CONFIG.EMAILJS_SERVICE_ID,
             CONFIG.EMAILJS_TEMPLATE_ID,
             formData
         );
-        
+
         if (response.status === 200) {
             return { success: true };
         }
@@ -276,7 +282,7 @@ function initForm() {
 
         try {
             const formData = await getFormData();
-            
+
             if (!validateFormData(formData)) {
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'Enviar Ocorrência';
