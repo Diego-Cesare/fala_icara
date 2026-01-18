@@ -164,8 +164,8 @@ function fileToBase64(file) {
                 let width = img.width;
                 let height = img.height;
                 
-                // Reduz para máximo 800px de largura
-                const maxWidth = 800;
+                // Reduz para máximo 1600px de largura
+                const maxWidth = 1600;
                 if (width > maxWidth) {
                     height = (height * maxWidth) / width;
                     width = maxWidth;
@@ -178,7 +178,7 @@ function fileToBase64(file) {
                 ctx.drawImage(img, 0, 0, width, height);
                 
                 // Comprime em JPEG com qualidade 0.7 (reduz muito o tamanho)
-                const compressedBase64 = canvas.toDataURL('image/jpeg', 0.7);
+                const compressedBase64 = canvas.toDataURL('image/jpeg', 0.85);
                 resolve(compressedBase64);
             };
             img.onerror = reject;
