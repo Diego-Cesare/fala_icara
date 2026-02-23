@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="src/styles/style.css" />
+    <link rel="stylesheet" href="src/styles/formulary.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/duotone/style.css"
+    />
+    <title>Conecta Içara | Registro de Ocorrência</title>
+  </head>
+
+  <body class="formulary-body" id="formulary">
+    <header class="formulary-header">
+      <div class="slogan" aria-label="Marca do aplicativo">
+        <div class="slogan-top">Conecta</div>
+        <div class="slogan-bottom">Içara</div>
+      </div>
+      <div class="slogan-legend">
+        <span>Conectando você à cidade.</span>
+        <span>Secretaria Municipal de Obras.</span>
+      </div>
+    </header>
+    <main class="formulary-main">
+      <form id="report-form" class="formulary-form">
+        <fieldset class="box">
+          <legend>Dados do usuário</legend>
+          <label for="name">Nome</label>
+          <input
+            id="name"
+            name="name"
+            type="text"
+            placeholder="Nos diga seu nome completo"
+            autocomplete="name"
+            required
+          />
+
+          <label for="phone">Telefone</label>
+          <input
+            id="phone"
+            name="phone"
+            type="tel"
+            placeholder="(48) 99999-9999"
+            autocomplete="tel"
+            inputmode="numeric"
+            maxlength="15"
+            required
+          />
+        </fieldset>
+
+        <fieldset class="box">
+          <legend>Local do problema</legend>
+          <div class="location-actions">
+            <button
+              type="button"
+              class="media-trigger location-trigger"
+              id="capture-location"
+            >
+              <i class="ph-duotone ph-map-pin-line" aria-hidden="true"></i>
+              Capturar minha localização
+            </button>
+            <p id="location-status" class="location-status" aria-live="polite">
+              Localização não capturada.
+            </p>
+            <input type="hidden" id="latitude" name="latitude" />
+            <input type="hidden" id="longitude" name="longitude" />
+            <input
+              type="hidden"
+              id="location-captured-at"
+              name="location_captured_at"
+            />
+          </div>
+
+          <label for="loc">Bairro</label>
+          <input
+            id="loc"
+            name="loc"
+            type="text"
+            placeholder="Nome do bairro"
+            autocomplete="address-level2"
+            maxlength="80"
+            required
+          />
+
+          <label for="street">Rua</label>
+          <input
+            id="street"
+            name="street"
+            type="text"
+            placeholder="Ex: Rua 7 de Setembro"
+            autocomplete="street-address"
+            maxlength="120"
+            required
+          />
+        </fieldset>
+
+        <fieldset class="box">
+          <legend>Descrição do problema</legend>
+          <label for="type">Tipo</label>
+          <input
+            id="type"
+            name="type"
+            type="text"
+            placeholder="Ex: Buraco na rua"
+            maxlength="80"
+            required
+          />
+
+          <label for="desc">Descrição</label>
+          <textarea
+            name="desc"
+            id="desc"
+            placeholder="Descreva o problema em detalhes"
+            rows="5"
+            minlength="10"
+            maxlength="500"
+            required
+          ></textarea>
+        </fieldset>
+
+        <fieldset class="box media-box">
+          <legend>Imagens do problema</legend>
+          <p class="media-help">
+            Você pode adicionar até 2 imagens no total (galeria e câmera).
+          </p>
+
+          <div class="media-actions">
+            <input
+              id="gallery-input"
+              name="gallery_images"
+              type="file"
+              accept="image/*"
+              multiple
+              hidden
+            />
+            <button type="button" class="media-trigger" id="gallery-trigger">
+              <i class="ph-duotone ph-image-square" aria-hidden="true"></i>
+              Adicionar imagens
+            </button>
+
+            <input
+              id="camera-input"
+              name="camera_images"
+              type="file"
+              accept="image/*"
+              capture="environment"
+              multiple
+              hidden
+            />
+            <button type="button" class="media-trigger" id="camera-trigger">
+              <i class="ph-duotone ph-camera" aria-hidden="true"></i>
+              Abrir câmera
+            </button>
+          </div>
+
+          <div class="media-preview-group">
+            <p class="media-label">Imagens anexadas</p>
+            <p class="media-counts">
+              <span id="gallery-count">Galeria 0</span>
+              <span id="camera-count">Câmera 0</span>
+              <span id="total-count">Total 0/2</span>
+            </p>
+            <div id="media-preview" class="media-preview"></div>
+          </div>
+        </fieldset>
+      </form>
+    </main>
+    <footer class="formulary-footer">
+      <button type="button" class="action-btn action-download">
+        <i class="ph-duotone ph-download-simple" aria-hidden="true"></i>
+        <span>Baixar</span>
+      </button>
+      <button type="button" class="action-btn action-send">
+        <i class="ph-duotone ph-share-network" aria-hidden="true"></i>
+        <span>Compartilhar</span>
+      </button>
+      <button type="reset" form="report-form" class="action-btn action-clear">
+        <i class="ph-duotone ph-trash" aria-hidden="true"></i>
+        <span>Limpar</span>
+      </button>
+    </footer>
+    <p id="pdf-status" class="pdf-status" role="status" aria-live="polite"></p>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+    <script src="src/scripts/formulary-media.js"></script>
+    <script src="src/scripts/formulary-actions.js"></script>
+  </body>
+</html>
