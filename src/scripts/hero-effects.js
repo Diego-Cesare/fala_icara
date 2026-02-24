@@ -6,8 +6,8 @@ const hero = document.getElementById("hero");
 
 function animeSlogan() {
   if (!heroSloganTop || !heroSloganBottom) return;
-  heroSloganTop.style.transform = "translateX(0px)";
-  heroSloganBottom.style.transform = "translateX(0px)";
+  heroSloganTop.style.transform = "translateX(20%)";
+  heroSloganBottom.style.transform = "translateX(-20%)";
 }
 
 function animeDescription() {
