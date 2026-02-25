@@ -131,7 +131,11 @@ async function reverseGeocode(latitude, longitude) {
   return payload?.address ?? null;
 }
 
+let lastLocationRequest = 0;
 async function captureUserLocation() {
+  const now = Date.now();
+  if (now - lastLocationRequest < 2000) return;
+  lastLocationRequest = now;
   if (!navigator.geolocation) {
     updateLocationStatus("Seu navegador não suporta geolocalização.", "error");
     return;
