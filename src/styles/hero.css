@@ -116,18 +116,23 @@
     filter 120ms ease;
 }
 
-.init-btn:hover {
-  transform: translateY(-1px);
-  filter: brightness(1.04);
-}
-
-.init-btn:focus-visible {
-  outline: 2px solid var(--fg);
-  outline-offset: 2px;
-}
-
-.init-btn i {
-  font-size: 1.2em;
+.about {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  text-transform: uppercase;
+  width: 200px;
+  height: 50px;
+  font-size: 1.4rem;
+  background-color: var(--red);
+  border: none;
+  outline: none;
+  color: var(--fg);
+  border-radius: 20px;
+  text-decoration: none;
+  transition:
+    transform 120ms ease,
+    filter 120ms ease;
 }
 
 @media (max-width: 640px) {
