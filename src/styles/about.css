@@ -7,43 +7,55 @@ body {
 .about-box {
   padding: 12px;
   background-color: var(--bg);
-  border: solid 1px var(--border);
+  border: solid 1px var(--blue);
   margin: 20px 10px;
   border-radius: 20px;
+  position: relative;
 }
 
 .about-box h3 {
   color: var(--bg);
   background-color: var(--blue);
+  letter-spacing: 0.5rem;
   padding: 3px 10px;
-  border-radius: 3px;
-  margin-bottom: 10px;
+  border-radius: 50px;
   font-size: 1.4rem;
+  position: absolute;
+  top: -15px;
+  left: -10px;
 }
 
 .about-box p {
+  margin-top: 10px;
   color: var(--fg);
   font-size: 1.2rem;
-  font-weight: bold;
+  font-weight: 400;
 }
 
 .about-box li {
-  color: var(--bg);
+  color: var(--fg);
   font-size: 1.2rem;
-  background-color: var(--blue);
+  background-color: var(--green);
   padding: 5px 10px;
   list-style: none;
   border-radius: 10px;
 }
 
+i {
+  font-weight: 600;
+}
+
 a {
   text-decoration: none;
   background-color: var(--blue);
-  width: 50%;
+  width: 30%;
   padding: 10px;
   color: var(--bg);
   font-size: 1.4rem;
   text-align: center;
-  font-weight: bold;
+  font-weight: 400;
   border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

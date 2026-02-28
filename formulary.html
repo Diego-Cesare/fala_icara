@@ -43,12 +43,13 @@
           <input
             id="phone"
             name="phone"
-            type="tel"
-            placeholder="(48) 99999-9999"
-            autocomplete="tel"
+            type="number"
+            placeholder="(opicional) 4899999-9999"
+            autocomplete="number"
             inputmode="numeric"
-            maxlength="15"
-            required
+            oninput="
+              if (this.value.length > 11) this.value = this.value.slice(0, 11);
+            "
           />
         </fieldset>
 
@@ -178,7 +179,7 @@
         <i class="ph-duotone ph-share-network" aria-hidden="true"></i>
         <span>Compartilhar</span>
       </button>
-      <a href="about.html">Ajuda</a>
+      <a href="about.html"><i class="ph-duotone ph-info"></i> Ajuda</a>
 
       <!-- <button type="reset" form="report-form" class="action-btn action-clear">
         <i class="ph-duotone ph-trash" aria-hidden="true"></i>
