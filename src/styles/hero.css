@@ -12,7 +12,7 @@
 .hero-body .whatsapp-btn {
   text-decoration: none;
   position: absolute;
-  top: 20px;
+  top: 10px;
   right: 10px;
   background-color: var(--green);
   padding: 2px 5px;
@@ -24,10 +24,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 10px;
 }
 
 .whatsapp-btn i {
-  font-size: 2rem;
+  font-size: 1.3rem;
 }
 
 .hero-container {
@@ -53,7 +54,7 @@
 }
 
 .hero-title img {
-  width: min(300px, 100%);
+  width: min(250px, 100%);
   border-bottom: solid 2px var(--border);
 }
 
