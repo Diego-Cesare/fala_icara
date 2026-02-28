@@ -164,11 +164,6 @@
     border-color 120ms ease;
 }
 
-.media-trigger:hover {
-  transform: translateY(-1px);
-  filter: brightness(1.03);
-}
-
 .media-trigger:focus-visible {
   outline: 2px solid var(--fg);
   outline-offset: 2px;
