@@ -1,6 +1,7 @@
 .hero-body {
   min-height: 100dvh;
-  background-color: var(--bg);
+  /* background-color: var(--bg); */
+  background: radial-gradient(circle at top, #46b8ff 0%, var(--bg) 45%);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -107,15 +108,17 @@
 .about {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  padding: 0px 30px;
   text-transform: uppercase;
-  width: 70%;
-  height: 50px;
+  width: 80%;
+  height: 40px;
   font-size: 1.2rem;
-  background-color: var(--blue);
+  background-color: var(--black-alpha);
+  color: var(--fg);
   border: none;
   outline: none;
-  color: var(--bg);
+  border: dashed 1px var(--black-alpha);
   border-radius: 6px;
   text-decoration: none;
 }
@@ -125,9 +128,13 @@
   color: var(--fg);
 }
 
+.init-btn {
+  color: var(--blue);
+}
+
 .about {
-  background-color: var(--red);
-  color: var(--bg);
+  background-color: var(--black-alpha);
+  color: var(--fg);
 }
 
 i,
