@@ -331,7 +331,7 @@ a {
 a {
   /* background: linear-gradient(180deg, #e3f8cf 0%, #d0efb1 100%); */
   background-color: var(--blue);
-  color: var(--fg);
+  color: var(--bg);
 }
 
 .action-send i,
