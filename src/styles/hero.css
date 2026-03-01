@@ -9,24 +9,6 @@
   position: relative;
 }
 
-.hero-body .whatsapp-btn {
-  text-decoration: none;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background-color: var(--green);
-  padding: 2px 5px;
-  color: var(--fg);
-  font-size: 1rem;
-  font-weight: 600;
-  border-radius: 10px;
-  box-shadow: 2px 2px 2px 0px #0000006c;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-}
-
 .whatsapp-btn i {
   font-size: 1.3rem;
 }
@@ -42,11 +24,11 @@
   transition: 1s;
 }
 
-.hero-container p {
-  font-size: 1.6rem;
+.hero-container .hero-description p {
+  font-size: 1rem;
   color: var(--black);
   text-align: center;
-  line-height: 1.35;
+  line-height: 1.5;
 }
 
 .hero-title {
@@ -54,7 +36,7 @@
 }
 
 .hero-title img {
-  width: min(250px, 100%);
+  width: min(290px, 100%);
   border-bottom: solid 2px var(--border);
 }
 
@@ -121,20 +103,26 @@
 }
 
 .init-btn,
+.whatsapp-btn,
 .about {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-evenly;
   text-transform: uppercase;
-  width: 200px;
+  width: 70%;
   height: 50px;
   font-size: 1.2rem;
   background-color: var(--blue);
   border: none;
   outline: none;
   color: var(--bg);
-  border-radius: 20px;
+  border-radius: 6px;
   text-decoration: none;
+}
+
+.whatsapp-btn {
+  background-color: var(--green);
+  color: var(--fg);
 }
 
 .about {
@@ -142,7 +130,8 @@
   color: var(--bg);
 }
 
-i {
+i,
+.whatsapp-btn i {
   font-size: 2rem;
 }
 

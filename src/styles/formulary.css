@@ -298,7 +298,7 @@
 
 .action-btn,
 a {
-  border: 1px solid transparent;
+  border: 1px dashed var(--fg);
   width: calc(100% - 1rem);
   min-height: 22px;
   padding: 0.4rem 0.25rem;
@@ -332,7 +332,7 @@ a {
 a {
   /* background: linear-gradient(180deg, #e3f8cf 0%, #d0efb1 100%); */
   background-color: var(--blue);
-  color: var(--bg);
+  color: var(--fg);
 }
 
 .action-send i,
